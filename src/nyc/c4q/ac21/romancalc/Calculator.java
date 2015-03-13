@@ -1,5 +1,7 @@
 package nyc.c4q.ac21.romancalc;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +9,30 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Calculator {
+
+    /*public static boolean validate(String num){
+
+        for(int index=0;index < num.length(); index=index+1){
+
+            String currentChar=String.valueOf(num.charAt(index));
+
+            System.out.println(currentChar);
+
+            if  (      currentChar.equals("M")
+                    || currentChar.equals("D")
+                    || currentChar.equals("C")
+                    || currentChar.equals("L")
+                    || currentChar.equals("X")
+                    || currentChar.equals("V")
+                    || currentChar.equals("I") ){
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     /**
      * Performs calculations on Roman numerals and prints the result.
      *
@@ -15,6 +41,7 @@ public class Calculator {
      * operation and prints the result in Roman numerals.  If the result is
      * less than 1 or larger than 3999, prints a message indicating this
      * instead.
+     *
      *
      * @param leftNumber
      *   The left operand, in Roman numerals.
@@ -31,6 +58,44 @@ public class Calculator {
      */
     public static void calculate(String leftNumber, String operation, String rightNumber) {
         // TODO: Group 3: Write this function!
+
+
+        int left = RomanNumerals.parse(leftNumber);
+        int right = RomanNumerals.parse(rightNumber);
+        int result = 0;
+
+        if (left == -1 || right == -1) {
+            System.out.println("Not a roman numeral! ");
+
+        } else if (operation.equals("+")) {
+
+            result = left + right;
+
+        } else if (operation.equals("-")) {
+            result = left - right;
+        } else if (operation.equals("/")) {
+            result = left / right;
+        } else if (operation.equals("*")) {
+            result = left * right;
+        } else if (operation.equals("%")) {
+            result = left % right;
+        } else {
+            System.out.println("Invalid operation.");
+
+
+            if (result < 0) {
+                System.out.println("Result is less than 1! It doesn't exist!");
+            }
+
+            if (result > 3999) {
+                System.out.println("Result is higher than 3999, Romans couldn't count that high!");
+            }
+
+            String output = RomanNumerals.format(result);
+
+            System.out.println(output);
+
+        }
     }
 
     /**
@@ -57,6 +122,7 @@ public class Calculator {
      *   You do not need to understand how this function works.
      */
     public static void main(String[] args) throws IOException {
+
         final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         // Loop forever.
         while (true) {
@@ -82,10 +148,24 @@ public class Calculator {
                 continue;
             }
 
-            // Perform the calculation and show the result.
-            calculate(leftNumber, operation, rightNumber);
 
-            System.out.println();
+           /* if (! validate(leftNumber) || (! validate(rightNumber)))
+                System.err.println("syntax error - LeftNumber not a roman numeral");
+                System.out.println();
+                continue;
+
+            if (! validate(rightNumber))
+                System.err.println("syntax error - rightNumber not a roman numeral");
+                System.out.println();
+                continue;
+
+            // Perform the calculation and show the result.*/
+           calculate(leftNumber, operation, rightNumber);
+
+
+
         }
+
     }
 }
+
